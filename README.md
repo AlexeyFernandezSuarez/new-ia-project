@@ -377,7 +377,7 @@ The repository already contains `skills/new-ai-project/SKILL.md`, so the CLI can
 npx skills add AlexeyFernandezSuarez/new-ai-project --skill new-ai-project --list
 ```
 
-Once published, the listing appears at `https://www.skills.sh/AlexeyFernandezSuarez/new-ai-project`. Full instructions: [docs/publishing.md](docs/publishing.md).
+The listing is available at `https://www.skills.sh/AlexeyFernandezSuarez/new-ia-project`. Full instructions: [docs/publishing.md](docs/publishing.md).
 
 ---
 
