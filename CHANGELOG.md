@@ -25,5 +25,5 @@ and versioning follows [Semantic Versioning](https://semver.org/).
 - Tests with `node --test` and static repository validation.
 - Continuous integration on Linux and Windows with Node.js 20 and 22.
 
-[Unreleased]: https://github.com/OWNER/new-ai-project/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/OWNER/new-ai-project/releases/tag/v1.0.0
+[Unreleased]: https://github.com/AlexeyFernandezSuarez/new-ai-project/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/AlexeyFernandezSuarez/new-ai-project/releases/tag/v1.0.0

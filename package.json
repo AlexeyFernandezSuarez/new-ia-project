@@ -34,6 +34,15 @@
     "sdd",
     "scaffolding",
     "agents-md",
-    "skills"
-  ]
+    "skills",
+    "i18n"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexeyFernandezSuarez/new-ia-project.git"
+  },
+  "homepage": "https://github.com/AlexeyFernandezSuarez/new-ia-project#readme",
+  "bugs": {
+    "url": "https://github.com/AlexeyFernandezSuarez/new-ia-project/issues"
+  }
 }

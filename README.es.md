@@ -34,7 +34,7 @@ Requisitos: Node.js 20 o superior. El instalador no hace peticiones de red.
 ### Opción A — Como skill desde skills.sh
 
 ```bash
-npx skills add <TU_USUARIO>/new-ai-project --skill new-ai-project -a opencode -y --copy
+npx skills add AlexeyFernandezSuarez/new-ai-project --skill new-ai-project -a opencode -y --copy
 ```
 
 Después instala el comando en el proyecto:
@@ -46,7 +46,7 @@ node .agents/skills/new-ai-project/scripts/install.mjs --project --target openco
 ### Opción B — Desde el repositorio, global
 
 ```bash
-git clone https://github.com/<TU_USUARIO>/new-ai-project.git
+git clone https://github.com/AlexeyFernandezSuarez/new-ai-project.git
 cd new-ai-project
 node skills/new-ai-project/scripts/install.mjs --global --target opencode
 ```
@@ -362,7 +362,7 @@ git init
 git add .
 git commit -m "feat: new_ai_project command and SDD toolkit"
 git branch -M main
-git remote add origin https://github.com/<TU_USUARIO>/new-ai-project.git
+git remote add origin https://github.com/AlexeyFernandezSuarez/new-ai-project.git
 git push -u origin main
 ```
 
@@ -371,10 +371,10 @@ git push -u origin main
 El repositorio ya contiene `skills/new-ai-project/SKILL.md`, así que el CLI puede descubrirlo:
 
 ```bash
-npx skills add <TU_USUARIO>/new-ai-project --skill new-ai-project --list
+npx skills add AlexeyFernandezSuarez/new-ai-project --skill new-ai-project --list
 ```
 
-Una vez publicado, la ficha aparece en `https://www.skills.sh/<TU_USUARIO>/new-ai-project`. Instrucciones completas: [docs/publishing.md](docs/publishing.md).
+Una vez publicado, la ficha aparece en `https://www.skills.sh/AlexeyFernandezSuarez/new-ai-project`. Instrucciones completas: [docs/publishing.md](docs/publishing.md).
 
 ---
 
