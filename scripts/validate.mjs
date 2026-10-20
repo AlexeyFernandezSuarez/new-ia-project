@@ -177,6 +177,8 @@ group("main command", () => {
     ["English is updated first", "missing the update order for translations"],
     ["docs/i18n.md", "missing the translation index"],
     ["BCP-47", "missing the language tag format"],
+    ["Never double-suffix", "missing the double-suffix guard"],
+    ["Reject `en`", "missing the English secondary-language guard"],
     ["MEMORY.md", "missing MEMORY.md"],
     ["≤60 lines", "missing the MEMORY.md size limit"],
   ];

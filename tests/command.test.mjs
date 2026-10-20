@@ -101,6 +101,8 @@ test("writes English artifacts and supports localized copies", () => {
   assert.match(normalized, /English is updated first/);
   assert.match(normalized, /docs\/i18n\.md/);
   assert.match(normalized, /BCP-47/);
+  assert.match(normalized, /Reject `en`/);
+  assert.match(normalized, /Never double-suffix/);
 });
 
 test("has a help mode that writes nothing", () => {

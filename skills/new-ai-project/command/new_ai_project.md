@@ -23,8 +23,9 @@ You act as a **senior software architect**, a **harness engineer** and a **techn
 - **Default: English only.** With no `--lang`, do not create any suffixed copy.
 - **Localized copies are translations, not summaries.** They must preserve every section, requirement ID, table row, link and code block. Keep identifiers, paths, commands, status tokens, ADR numbers and EARS keywords in English inside the translation so the model can trace them. Translate the prose and headings.
 - **English is updated first.** Whenever a document changes, update the English source, then mirror the change into every localized copy, and update `docs/i18n.md`. If a copy cannot be updated, mark it `OUTDATED` in `docs/i18n.md` and tell the user; never leave a silent divergence.
-- **Language code format.** Accept BCP-47-like tags: `es`, `en`, `pt-BR`, `zh-Hans`. Normalize the primary subtag to lowercase and preserve the region/script casing. Use the tag as the filename suffix. Reject anything that does not match `^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$`.
+- **Language code format.** Accept BCP-47-like tags: `es`, `en`, `pt-BR`, `zh-Hans`. Normalize the primary subtag to lowercase and preserve the region/script casing. Use the tag as the filename suffix. Reject anything that does not match `^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$`. Reject `en` as a secondary language: it would duplicate the English source.
 - **Multiple languages.** `--lang=es,pt-BR` creates both sets of copies. Each language is independent.
+- **Never double-suffix.** If `name.<code>.md` already exists, treat it as the translation and merge/update it; do not create `name.<code>.<code>.md`.
 - **Exception: `docs/i18n.md` is not translated.** It is the translation index and stays in English.
 - **Both syntaxes.** Accept `--lang=es` and `--lang es`; if the flag is present without a value, stop and ask for a valid code. Do not guess.
 
