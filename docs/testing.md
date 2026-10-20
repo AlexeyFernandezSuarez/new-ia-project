@@ -50,6 +50,7 @@ Each test creates a temporary folder and runs the installer with `cwd` inside it
 | Unknown option | Exits with code 1 and shows help |
 | `--help` | Exits with code 0 and shows usage |
 | `--global` | With a temporary home, writes to `.config/opencode/commands/` |
+| CRLF source | Parses frontmatter and transforms Claude commands on Windows checkouts |
 
 ### Command (`tests/command.test.mjs`)
 
