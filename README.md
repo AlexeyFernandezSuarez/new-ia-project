@@ -116,6 +116,11 @@ Usage:
   /new_ai_project [idea] [options]
   /new_ai_project --help
 
+What it does:
+  Creates or adapts the structure, documentation and harness of a software
+  project so humans and AI agents can work with Spec-Driven Development.
+  It does not implement application features.
+
 Modes:
   (no mode)           Ask which flow to use.
   generic             Create folders and Markdown skeletons with TODO markers.
@@ -144,6 +149,19 @@ Examples:
   /new_ai_project --path=../my-new-project --lang=es
   /new_ai_project adapt --yes --no-install
   /new_ai_project --help
+
+Language:
+  All generated Markdown is written in English. The conversation uses your
+  language. --lang adds human-readable translations; English remains the
+  source of truth.
+
+Output:
+  AGENTS.md, MEMORY.md, README.md, docs/, specs/ with constitution and
+  features, project-scoped harness, and a code skeleton for the approved stack.
+
+Safety:
+  Nothing global by default. No destructive commands. No secrets. No changes
+  to existing functionality. Backups before overwriting or moving files.
 ```
 
 Other examples:
