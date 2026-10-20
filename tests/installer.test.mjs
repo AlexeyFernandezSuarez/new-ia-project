@@ -13,6 +13,7 @@ import {
   removeDir,
   repoRoot,
   runInstaller,
+  runNode,
 } from "./support.mjs";
 
 function tempProject(t) {
@@ -160,7 +161,25 @@ test("el kit SDD instala comandos, agentes, skill y plantillas", (t) => {
   assert.equal(files.filter((file) => file.startsWith(".opencode/agents/")).length, 4);
 });
 
-test("--global escribe en el home indicado y no en el proyecto", (t) => {
+test("handles a command source with CRLF line endings", (t) => {
+  const root = tempProject(t);
+  const skillDir = path.join(root, "skills", "new-ai-project");
+  fs.cpSync(path.join(repoRoot, "skills", "new-ai-project"), skillDir, { recursive: true });
+
+  const source = path.join(skillDir, "command", "new_ai_project.md");
+  fs.writeFileSync(source, readFile(source).replace(/\r?\n/g, "\r\n"), "utf8");
+
+  const result = runNode([path.join(skillDir, "scripts", "install.mjs"), "--project", "--target", "claude"], { cwd: root });
+  assert.equal(result.status, 0, result.stderr);
+
+  const content = readFile(path.join(root, ".claude", "commands", "new_ai_project.md"));
+  const frontmatter = content.slice(0, content.indexOf("\n---\n", 4));
+  assert.match(frontmatter, /description:/);
+  assert.doesNotMatch(frontmatter, /^agent:/m);
+  assert.match(content, /Execution contract/);
+});
+
+test("--global is written to the given home and not to the project", (t) => {
   const cwd = tempProject(t);
   const home = tempProject(t);
   const result = runInstaller(["--global", "--target", "opencode"], {

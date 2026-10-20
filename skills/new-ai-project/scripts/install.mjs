@@ -180,12 +180,13 @@ function backupFile(dest) {
 }
 
 function readFrontmatter(content) {
-  if (!content.startsWith("---\n")) return { frontmatter: "", body: content };
-  const end = content.indexOf("\n---\n", 4);
-  if (end === -1) return { frontmatter: "", body: content };
+  const normalized = content.replace(/\r\n/g, "\n");
+  if (!normalized.startsWith("---\n")) return { frontmatter: "", body: normalized };
+  const end = normalized.indexOf("\n---\n", 4);
+  if (end === -1) return { frontmatter: "", body: normalized };
   return {
-    frontmatter: content.slice(4, end),
-    body: content.slice(end + 5),
+    frontmatter: normalized.slice(4, end),
+    body: normalized.slice(end + 5),
   };
 }
 
