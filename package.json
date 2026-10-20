@@ -1,0 +1,39 @@
+{
+  "name": "new-ai-project",
+  "version": "1.0.0",
+  "description": "Slash command and SDD toolkit that prepares any repository for AI-assisted software development, with English docs and optional localized copies.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "new-ai-project": "skills/new-ai-project/scripts/install.mjs"
+  },
+  "files": [
+    "skills/",
+    "docs/",
+    "README.md",
+    "README.es.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/run.mjs",
+    "validate": "node scripts/validate.mjs",
+    "check": "npm run validate && npm test",
+    "install:project": "node skills/new-ai-project/scripts/install.mjs --project --target opencode",
+    "install:project:sdd": "node skills/new-ai-project/scripts/install.mjs --project --target opencode --with-sdd-kit",
+    "install:global": "node skills/new-ai-project/scripts/install.mjs --global --target opencode"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "opencode",
+    "spec-driven-development",
+    "sdd",
+    "scaffolding",
+    "agents-md",
+    "skills"
+  ]
+}
