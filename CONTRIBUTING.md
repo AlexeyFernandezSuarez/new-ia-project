@@ -39,6 +39,9 @@ skills/new-ai-project/
 Rules:
 
 - Command logic lives **only** in `command/new_ai_project.md`; `SKILL.md` references it.
+- The command template contains exactly one `$ARGUMENTS` placeholder, at the top, inside the raw-arguments section.
+- Never place an exclamation mark immediately before a backtick in a command template. OpenCode interprets that sequence as shell injection and corrupts the expanded prompt.
+- Keep the help gate before every other instruction and test it with `--help` after any edit.
 - The installer downloads nothing and writes outside the project only with explicit `--global`.
 - Assets must work without the repository: no absolute paths or external imports.
 - Generated project documents are written in **English**. Localized copies are optional translations and must stay in sync with the English source.

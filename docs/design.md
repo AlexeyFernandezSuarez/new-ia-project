@@ -139,6 +139,17 @@ The templates in `assets/templates/` are the structural reference. The command e
 - `docs/i18n.md` is the index and is never translated.
 - Default is English only; no suffix, no marker, no `docs/i18n.md`.
 
+## Command template constraints
+
+OpenCode treats some template syntax specially. The command follows these rules:
+
+- Exactly **one** `$ARGUMENTS` placeholder, at the top, under `### Raw arguments`. Additional placeholders cause self-referential substitutions.
+- The **help gate** comes before the role, language policy and preflight. It must stop on `--help`, `-h` or `help`.
+- No exclamation mark immediately before a backtick. OpenCode interprets that sequence as shell injection, executes a shell command and corrupts the expanded prompt.
+- Review the expanded prompt after editing: the raw arguments must appear literally, the help gate must be intact and no shell output may be injected.
+
+`npm run validate` enforces the placeholder count, help-gate order and the forbidden sequence. `tests/command.test.mjs` simulates the `--help` expansion.
+
 ## Installer
 
 `install.mjs` is a dependency-free Node.js script. Steps:

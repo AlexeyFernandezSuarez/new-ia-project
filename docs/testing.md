@@ -61,7 +61,8 @@ Each test creates a temporary folder and runs the installer with `cwd` inside it
 - `find-skills` with its URL and project-scoped install command.
 - `AGENTS.md`, `MEMORY.md`, constitution, features and the five artifacts.
 - English-by-default policy and `--lang` duplicates (`AGENTS.es.md`).
-- `--help` mode.
+- `--help` mode, bare `help` fallback and hard help-gate ordering.
+- Exactly one `$ARGUMENTS` placeholder and no exclamation-mark-before-backtick sequence.
 - Safety and scope prohibitions.
 
 ### Repository (`tests/repo.test.mjs`)
@@ -84,27 +85,30 @@ Automated tests cannot evaluate interview quality. Before publishing a version, 
 
 3. Run `/new_ai_project --help`.
    - It must print usage and write nothing.
-4. Run `/new_ai_project generic`.
+   - It must not inspect the directory, ask questions or start a flow.
+   - The expanded prompt must show the raw arguments at the top and no shell error text.
+4. Run `/new_ai_project help` and confirm it behaves like `--help`.
+5. Run `/new_ai_project generic`.
    - It must create only folders and `.md` files with headings and `TODO`.
    - It must not invent product, stack or features.
    - It must not install skills or MCPs.
    - Every document must be English.
-5. Delete the folder and repeat with `/new_ai_project` in guided mode.
+6. Delete the folder and repeat with `/new_ai_project` in guided mode.
    - One question per message.
    - Every question offers `Any suggestions?` and `You choose`.
    - The structure plan is approved before writing.
    - At the end, `AGENTS.md`, `MEMORY.md`, `specs/constitution/`, a feature with five artifacts and `docs/` exist.
    - The final report lists decisions, questions, verification and rollback.
-6. Run `/new_ai_project guided --lang=es`.
+7. Run `/new_ai_project guided --lang=es`.
    - Every English `.md` has a `.es.md` sibling, except `docs/i18n.md`.
    - Each translation starts with the `TRANSLATION of` marker.
    - `docs/i18n.md` lists source, translation, language, date and status.
    - `AGENTS.md` and `docs/README.md` link to the copies.
-7. Test adaptation in a sample repository with code and a `README.md`.
+8. Test adaptation in a sample repository with code and a `README.md`.
    - It must ask before touching anything.
    - It must offer adapt, new path, new folder or cancel.
    - It must preserve existing code and tests.
-8. Test `/sdd-spec`, `/sdd-clarify`, `/sdd-plan`, `/sdd-tasks`, `/sdd-implement` and `/sdd-validate` on the created feature.
+9. Test `/sdd-spec`, `/sdd-clarify`, `/sdd-plan`, `/sdd-tasks`, `/sdd-implement` and `/sdd-validate` on the created feature.
    - New feature documents must be English and, with `--lang`, have localized copies.
 
 ## Compatibility matrix

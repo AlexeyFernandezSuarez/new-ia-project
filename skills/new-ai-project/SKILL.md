@@ -44,7 +44,7 @@ This skill is the distribution wrapper for the **`/new_ai_project`** command. Th
 
 Invoke `/new_ai_project`. If the user invoked this skill instead, read `command/new_ai_project.md` (next to this `SKILL.md`) and follow it exactly as if the user had run `/new_ai_project`, passing the user's arguments.
 
-Show command help with `/new_ai_project --help`.
+Show command help with `/new_ai_project --help` (or `/new_ai_project help`).
 
 ### If the slash command is not installed
 
