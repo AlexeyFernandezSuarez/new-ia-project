@@ -121,6 +121,7 @@ Test at least once per version:
 ## Debugging
 
 - **The command does not appear**: check the harness path, restart the session and verify the file ends in `.md` (or `.prompt.md` in Copilot).
+- **A command still has the old behaviour after an update**: run `opencode reload` or restart OpenCode. The TUI caches command definitions.
 - **A file is skipped**: that is the default; use `--force` and review the backup.
 - **The installer fails on Windows**: run `node --version`; Node 20+ is required. Use `path.join`, never manual concatenation.
 - **A skill does not install**: `npx skills` needs network. The command installer does not; skill installation is a separate, authorized step.

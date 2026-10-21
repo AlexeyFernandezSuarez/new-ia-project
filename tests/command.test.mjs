@@ -105,11 +105,36 @@ test("writes English artifacts and supports localized copies", () => {
   assert.match(normalized, /Never double-suffix/);
 });
 
-test("has a help mode that writes nothing", () => {
-  assert.match(normalized, /### Help mode/);
-  assert.match(normalized, /If `\$ARGUMENTS` contains `--help` or `-h`/);
-  assert.match(normalized, /Create or modify nothing/);
-  const help = normalized.slice(normalized.indexOf("### Help mode"), normalized.indexOf("## 1. Preflight"));
+test("puts a hard help gate before every other instruction", () => {
+  assert.match(normalized, /### Raw arguments/);
+  assert.match(normalized, /### Help gate \(highest priority\)/);
+  assert.match(normalized, /or are exactly `help`/);
+  assert.match(normalized, /before anything else/);
+  assert.match(normalized, /do not run any other section/);
+  assert.match(normalized, /Do not run preflight, inspect files, ask questions or write anything/);
+  assert.ok(
+    normalized.indexOf("### Help gate") < normalized.indexOf("### Role"),
+    "the help gate must come before the role",
+  );
+  assert.ok(
+    normalized.indexOf("### Help gate") < normalized.indexOf("## 1. Preflight"),
+    "the help gate must come before preflight",
+  );
+
+  const placeholders = normalized.split("$ARGUMENTS").length - 1;
+  assert.equal(placeholders, 1, "the command must contain exactly one $ARGUMENTS placeholder");
+  assert.ok(!normalized.includes("!`"), "the command must not contain a shell-injection sequence");
+
+  const expanded = normalized.replace("$ARGUMENTS", "--help");
+  const beforeGate = expanded.slice(0, expanded.indexOf("### Help gate"));
+  assert.match(beforeGate, /--help/);
+  assert.doesNotMatch(expanded.slice(0, expanded.indexOf("## 1. Preflight")), /syntax error near unexpected token/);
+});
+
+test("contains the complete help text referenced by the gate", () => {
+  assert.match(normalized, /### Help text/);
+  assert.match(normalized, /This is the help text referenced by the help gate/);
+  const help = normalized.slice(normalized.indexOf("### Help text"), normalized.indexOf("## 1. Preflight"));
   for (const item of ["Usage:", "Modes:", "Options:", "Examples:", "Language:", "Safety:"]) {
     assert.ok(help.includes(item), `help is missing ${item}`);
   }

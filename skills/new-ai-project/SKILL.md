@@ -4,7 +4,7 @@ description: Create or adapt an AI-first software project with Spec-Driven Devel
 license: MIT
 metadata:
   author: new-ai-project
-  version: 1.0.0
+  version: 1.0.1
 ---
 
 # New AI Project

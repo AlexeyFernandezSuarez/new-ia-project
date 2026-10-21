@@ -86,6 +86,8 @@ node skills/new-ai-project/scripts/install.mjs --project --target claude,cursor
 node skills/new-ai-project/scripts/install.mjs --project --target opencode --dry-run
 ```
 
+Después de actualizar una instalación existente, ejecuta `opencode reload` o reinicia OpenCode. La TUI cachea las definiciones de comandos y una sesión abierta puede seguir usando la versión anterior.
+
 ---
 
 ## Uso
@@ -126,6 +128,7 @@ Modes:
                       the complete documents, code skeleton and harness.
   adapt               Adapt an existing project without changing its behaviour.
   --help, -h          Show this help and exit without writing anything.
+  help                Same as --help.
 
 Options:
   --path=<path>       Work in another directory (absolute or relative).

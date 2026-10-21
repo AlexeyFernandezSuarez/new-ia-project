@@ -7,6 +7,16 @@ agent: build
 
 ## 0. Execution contract
 
+### Raw arguments
+
+$ARGUMENTS
+
+### Help gate (highest priority)
+
+Read the raw arguments above before anything else. If they contain `--help` or `-h` as a separate token, or are exactly `help`, do not run any other section. Output the help text in "Help text" below in the user's language and stop. Do not run preflight, inspect files, ask questions or write anything.
+
+### Role
+
 You act as a **senior software architect**, a **harness engineer** and a **technical interviewer**. In this run you leave a project ready for agent-assisted development: living documentation, complete SDD, persistent memory, rules, harness and a code skeleton. **You do not implement the application.**
 
 ### Language policy
@@ -48,13 +58,11 @@ You act as a **senior software architect**, a **harness engineer** and a **techn
 - If your harness has a question tool with options, use it for every question.
 - Otherwise ask in chat and wait for the answer before continuing.
 - Use the filesystem and shell with paths relative to the project, or absolute paths if the user chose another location.
-- Do not use the command's own shell blocks (`!`); run checks with your normal tools.
+- Do not use OpenCode shell-injection blocks (an exclamation mark immediately followed by a backtick); run checks with your normal tools.
 
-### Arguments
+### Argument parsing
 
-`$ARGUMENTS`
-
-Interpret them as follows:
+Interpret the raw arguments above as follows:
 
 - `generic` or `generico` → force generic mode.
 - `guided` or `guiado` → force guided mode.
@@ -65,14 +73,14 @@ Interpret them as follows:
 - `--minimal` → skip subagents, ADRs and session logs; keep `AGENTS.md`, `MEMORY.md` and SDD.
 - `--lang=<code>` → create complete `<code>` translations next to every generated `.md`. Accepts a comma-separated list. Default: no translations.
 - `--secondary-lang=<code>` → alias of `--lang`.
-- `-h`, `--help` → print the help below and stop. Create or modify nothing.
+- `-h`, `--help`, or `help` → print the help below and stop. Create or modify nothing.
 - Any other text → use it as the initial project idea.
 
 If `--path` is present, do not change the session working directory: use that path in every tool call.
 
-### Help mode
+### Help text
 
-If `$ARGUMENTS` contains `--help` or `-h`, output the following help text in the user's language (translate the labels, keep commands and paths literal), then stop. Do not run preflight, do not ask questions and do not write files.
+This is the help text referenced by the help gate. Translate the labels, keep commands and paths literal.
 
 ```text
 /new_ai_project — AI-first project bootstrap
@@ -94,6 +102,7 @@ Modes:
                       the complete documents, code skeleton and harness.
   adapt               Adapt an existing project without changing its behaviour.
   --help, -h          Show this help and exit without writing anything.
+  help                Same as --help.
 
 Options:
   --path=<path>       Work in another directory (absolute or relative).

@@ -7,6 +7,16 @@ and versioning follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-21
+
+### Fixed
+
+- `/new_ai_project --help` now runs a hard help gate before preflight. The raw arguments are shown at the top of the expanded prompt and the command stops without inspecting or modifying the project.
+- Removed an exclamation-mark-plus-backtick sequence that OpenCode interpreted as shell injection, which corrupted the arguments section of the expanded prompt.
+- The command now contains exactly one `$ARGUMENTS` placeholder, avoiding self-referential substitutions such as "If `--help` contains `--help`".
+- Added validation and regression tests for the help gate, placeholder count and shell-injection pattern.
+- Documented `opencode reload` / restarting OpenCode after updating an existing global command.
+
 ## [1.0.0] - 2026-10-20
 
 ### Added
@@ -25,5 +35,6 @@ and versioning follows [Semantic Versioning](https://semver.org/).
 - Tests with `node --test` and static repository validation.
 - Continuous integration on Linux and Windows with Node.js 20 and 22.
 
-[Unreleased]: https://github.com/AlexeyFernandezSuarez/new-ai-project/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/AlexeyFernandezSuarez/new-ia-project/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/AlexeyFernandezSuarez/new-ia-project/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/AlexeyFernandezSuarez/new-ai-project/releases/tag/v1.0.0

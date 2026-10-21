@@ -141,6 +141,14 @@ group("main command", () => {
   check(!/[¿¡]/.test(content), `${relative}: command must be written in English`);
   isEnglishCanonical(relative);
 
+  const argumentPlaceholders = content.split("$ARGUMENTS").length - 1;
+  check(argumentPlaceholders === 1, `${relative}: must contain exactly one $ARGUMENTS placeholder, found ${argumentPlaceholders}`);
+  check(!content.includes("!`"), `${relative}: contains an exclamation mark followed by a backtick, which OpenCode treats as shell injection`);
+  check(content.indexOf("### Raw arguments") < content.indexOf("### Help gate"), `${relative}: raw arguments must appear before the help gate`);
+  check(content.indexOf("### Help gate") < content.indexOf("### Role"), `${relative}: help gate must run before the role instructions`);
+  check(content.indexOf("### Help gate") < content.indexOf("## 1. Preflight"), `${relative}: help gate must run before preflight`);
+  check(content.indexOf("### Help text") > content.indexOf("### Help gate"), `${relative}: missing help text after the help gate`);
+
   for (let index = 0; index <= 10; index += 1) {
     check(content.includes(`## ${index}.`), `${relative}: missing section ${index}`);
   }
@@ -166,7 +174,11 @@ group("main command", () => {
     ["Do not change functionality", "does not protect existing functionality"],
     ["--minimal", "missing --minimal"],
     ["--help", "missing --help"],
-    ["### Help mode", "missing the help section"],
+    ["### Help gate", "missing the help gate"],
+    ["### Raw arguments", "missing the raw arguments section"],
+    ["### Help text", "missing the help text section"],
+    ["Help gate (highest priority)", "the help gate is not marked as highest priority"],
+    ["or are exactly `help`", "missing the bare help fallback"],
     ["All Markdown artifacts are written in English", "missing the English artifact policy"],
     ["Default: English only", "missing the default language policy"],
     ["--lang=<code>", "missing the --lang parameter"],

@@ -1,6 +1,6 @@
 {
   "name": "new-ai-project",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Slash command and SDD toolkit that prepares any repository for AI-assisted software development, with English docs and optional localized copies.",
   "license": "MIT",
   "type": "module",
